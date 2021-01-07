@@ -8,8 +8,12 @@
   },
   "dependencies": {
     "apollo-server": "^2.19.1",
+    "apollo-server-express": "^2.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "graphql": "^15.4.0",
-    "graphql-upload": "^11.0.0"
+    "graphql-upload": "^11.0.0",
+    "postgres-bytea": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
