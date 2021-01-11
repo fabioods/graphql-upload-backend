@@ -13,7 +13,8 @@
     "express": "^4.17.1",
     "graphql": "^15.4.0",
     "graphql-upload": "^11.0.0",
-    "postgres-bytea": "^3.0.0"
+    "postgres-bytea": "^3.0.0",
+    "stream-to-array": "^2.3.0"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
