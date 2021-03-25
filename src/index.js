@@ -20,16 +20,16 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    singleUpload(file: Upload!): File!
+    singleUpload(files: [Upload!]): [File!]
   }
 `;
 
 const resolvers = {
   Mutation: {
     singleUpload: (parent, args) => {
-      console.log('args', args);
-      return args.file.then(async file => {
-        const { createReadStream, filename, mimetype } = file;
+      const files = args.files.map(async file => {
+        const resolver = await file;
+        const { createReadStream, filename, mimetype } = resolver;
         const fileStream = createReadStream();
         const arrayFromBuffer = await toArray(fileStream);
         const bufferToBase64 = Buffer.concat(arrayFromBuffer).toString(
@@ -38,8 +38,9 @@ const resolvers = {
 
         const pathToUpload = path.resolve(__dirname, '..', 'upload');
         fileStream.pipe(fs.createWriteStream(`${pathToUpload}/${filename}`));
-        return { ...file, base64: bufferToBase64 };
+        return { ...resolver, base64: bufferToBase64 };
       });
+      return files;
     },
   },
 };
